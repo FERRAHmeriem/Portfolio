@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meriem Ferrah — Portfolio Gazette</title>
+  <meta name="description" content="A modern newspaper‑style portfolio for Meriem Ferrah — pure HTML & CSS." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* =====================
+       THE PORTFOLIO GAZETTE
+       Pure HTML + CSS only
+       ===================== */
+
+    /* Color & type system */
+    :root{
+      --ink: #131311;           /* body text */
+      --ink-soft: #44433f;
+      --ink-faint: #6e6b63;
+      --paper: #f6f3ea;         /* warm off‑white */
+      --paper-2: #f1ede3;       /* subtle panel */
+      --accent: #b22d2d;        /* headline red */
+      --accent-2: #1a6e6e;      /* secondary teal */
+      --rule: rgba(0,0,0,.14);  /* hairline rules */
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --radius: 16px;
+      --max: 1150px;
+    }
+
+    /* Base */
+    *{ box-sizing: border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0; color:var(--ink); background: var(--paper);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      line-height:1.6; font-size: 17px; 
+      /* subtle fiber texture via layered gradients */
+      background-image:
+        radial-gradient(2200px 900px at -10% -20%, rgba(0,0,0,.05), transparent 40%),
+        radial-gradient(1400px 800px at 110% 10%, rgba(0,0,0,.05), transparent 45%),
+        linear-gradient(transparent 98%, rgba(0,0,0,.04) 98.5%),
+        repeating-linear-gradient(90deg, rgba(0,0,0,.02) 0 2px, transparent 2px 4px);
+      background-size: auto, auto, 100% 20px, 8px 100%;
+      background-attachment: fixed;
+    }
+    main{ display:block; }
+    img{ max-width:100%; height:auto; display:block; }
+    a{ color:inherit; text-decoration:none; }
+
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce){
+      *{ animation: none !important; transition: none !important; }
+    }
+
+    /* ====== Masthead ====== */
+    .masthead{
+      position: sticky; top:0; z-index: 10; backdrop-filter: blur(6px);
+      background: color-mix(in oklab, var(--paper) 75%, transparent);
+      border-bottom: 1px solid var(--rule);
+    }
+    .mastwrap{ max-width: var(--max); margin:0 auto; padding: 14px 18px; display:flex; gap:18px; align-items:center; justify-content:space-between; }
+    .nameplate{
+      font-family: 'Playfair Display', serif; font-weight: 900; letter-spacing: .5px;
+      font-size: clamp(26px, 4vw, 40px);
+      display:flex; align-items:baseline; gap:10px;
+    }
+    .nameplate span{ color: var(--accent); }
+    
+    /* Nav — thin uppercase with animated underline */
+    .nav{ display:flex; gap:12px; flex-wrap:wrap; }
+    .nav a{ font-weight:700; text-transform:uppercase; letter-spacing:.14em; font-size: 12px; padding:8px 10px; position:relative; }
+    .nav a::after{ content:""; position:absolute; left:10px; right:10px; bottom:6px; height:1.5px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .3s ease; opacity:.7; }
+    .nav a:hover::after{ transform: scaleX(1); }
+
+    /* ====== Ticker ====== */
+    .ticker{ border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); background: var(--paper-2); }
+    .ticker-row{ max-width: var(--max); margin:0 auto; padding: 8px 18px; display:flex; gap:12px; align-items:center; overflow:hidden; }
+    .tag{z-index: 100; font-family: 'JetBrains Mono', monospace; background:var(--ink); color:var(--paper); padding:6px 10px; border-radius: 999px; font-size: 12px; }
+    .scroll{ display:flex; gap:30px; white-space:nowrap; animation: headlines 30s linear infinite; }
+    @keyframes headlines{ from{ transform: translateX(0);} to{ transform: translateX(-50%);} }
+    .bullet{ position:relative; padding-left:16px; }
+    .bullet::before{ content:"•"; position:absolute; left:0; top:0; color: var(--ink-faint); }
+
+    /* ====== Front page hero ====== */
+    .front{ max-width: var(--max); margin: 26px auto; padding: 0 8px; }
+    .lead{ display:grid; grid-template-columns: 1.6fr .4fr; gap: 20px; }
+    @media (max-width: 900px){ .lead{ grid-template-columns: 1fr; } }
+    .lede{
+      padding: 18px ; border: 1px solid var(--rule); border-radius: var(--radius); background: linear-gradient(180deg, #ffffff80, #ffffff10);
+      box-shadow: var(--shadow);
+    }
+    .kicker{ font-weight:800; color: var(--accent); text-transform: uppercase; letter-spacing: .12em; font-size: 12px; }
+    .headline{
+      font-family: 'Playfair Display', serif; font-weight: 900; line-height: 1.05; margin: 8px 0 6px;
+      font-size: clamp(28px, 5.3vw, 56px);
+      background: linear-gradient(90deg, var(--ink), var(--accent));
+      -webkit-background-clip:text; background-clip:text; color: transparent;
+    }
+    .dropcap::first-letter{
+      float:left; font-family:'Playfair Display', serif; font-weight:900; font-size: 64px; line-height:.8; padding: 8px 10px 0 0; color: var(--accent);
+    }
+    .byline{ font-family:'JetBrains Mono', monospace; color: var(--ink-faint); font-size: 12px; margin-top:8 px; }
+
+    /* Hero card */
+    .portrait{
+      border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden; background: var(--paper-2);
+    }
+    .portrait .image{
+      aspect-ratio: 4/3;
+      display:grid; place-items:center; position:relative; isolation:isolate;
+    }
+   .initials { width: 100%; height: 100%; }
+
+    
+    .initials img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; 
+        filter: grayscale(100%); 
+}
+   
+    /* ====== Multi-column section ====== */
+    .columns{ column-count: 3; column-gap: 26px; }
+    @media (max-width: 1100px){ .columns{ column-count: 2; } }
+    @media (max-width: 700px){ .columns{ column-count: 1; } }
+    .pullquote{
+      break-inside: avoid; margin: 10px 0; padding: 16px; background: var(--paper-2);
+      border: 1px solid var(--rule); border-radius: 12px; font-family: 'Playfair Display', serif; font-weight:700; font-size: 20px;
+    }
+
+    /* ====== Section rules & labels ====== */
+    .section-label{ display:flex; align-items:center; gap:12px; margin: 40px 0 14px; }
+    .section-label .rule{ flex:1; height:1px; background: var(--rule); }
+    .section-label .slug{ font-family:'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing:.18em; font-size: 11px; color: var(--ink-faint); }
+
+    /* ====== Cards Grid (projects) ====== */
+    .grid{ display:grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    .span-6{ grid-column: span 6; }
+    .span-4{ grid-column: span 4; }
+    .span-12{ grid-column: span 12; }
+    @media (max-width: 900px){ .span-6, .span-4{ grid-column: span 12; } }
+
+    .card{
+      background: #fff; border:1px solid var(--rule); border-radius: var(--radius); overflow:clip; box-shadow: var(--shadow);
+      display:grid; grid-template-rows: auto 1fr auto; transform: translateZ(0); position: relative;
+    }
+    .card .banner{ height: 140px; background: linear-gradient(135deg, rgba(178,45,45,.18), rgba(26,110,110,.18)); border-bottom: 1px solid var(--rule); }
+    .card .body{ padding: 16px; }
+    .card h3{ margin:0 0 6px; font-family:'Playfair Display', serif; font-weight:900; letter-spacing:.2px; }
+    .meta{ font-size: 12px; color: var(--ink-faint); font-family:'JetBrains Mono', monospace; }
+    .meta2{ text-align:center ;font-size: 12px; color: var(--ink-faint); font-family:'JetBrains Mono', monospace; }
+    .chips{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .chip{ font-size: 12px; padding:6px 10px; border-radius:999px; border:1px solid var(--rule); background: var(--paper-2); }
+
+    /* Hover reveal — faux ink spread */
+    .card::after{
+      content:""; position:absolute; inset:auto -30% -40% auto; width: 80%; height: 80%; border-radius: 999px;
+      background: radial-gradient(50% 50% at 50% 50%, rgba(178,45,45,.18), transparent 60%);
+      transition: .5s ease; filter: blur(6px);
+    }
+    .card:hover::after{ inset: -30% auto auto -30%; }
+
+    /* ====== Sidebar box (Experience as classifieds) ====== */
+    .two-col{ display:grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+    @media (max-width: 900px){ .two-col{ grid-template-columns: 1fr; } }
+
+    .classifieds{ background:#fff; border:1px solid var(--rule); border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); }
+    .ad{ border-bottom: 1px dashed var(--rule); padding: 10px 0; }
+    .ad:last-child{ border-bottom: none; }
+    .ad .title{ font-weight:800; }
+
+    /* ====== Footer (letters to the editor) ====== */
+    footer{ margin-top: 50px; border-top: 1px dotted var(--ink);  }
+    .footerwrap{ max-width: var(--max); margin:0 auto; padding: 20px 18px 60px; display:flex; gap: 16px; flex-direction: column; }
+    @media (max-width: 900px){ .footerwrap{ grid-template-columns: 1fr; } }
+    .letter{ background: #fff; border:1px solid var(--rule); border-radius: 12px; padding: 16px; box-shadow: var(--shadow);  }
+
+    /* Micro-interactions */
+    .tilt{ transform: perspective(800px) rotateX(0deg) rotateY(0deg); transition: transform .4s ease; }
+    .tilt:hover{ transform: perspective(800px) rotateX(1.2deg) rotateY(-1.2deg); }
+
+    /* Print style – make it look like a proper newspaper page */
+    @media print{
+      .masthead, .ticker, .nav, .classifieds, footer{ display:none !important; }
+      body{ background: white; }
+      .columns{ column-count: 2; }
+      .card{ break-inside: avoid; box-shadow: none; }
+      .front{ margin:0; }
+    }
+    .project-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--rule);
+    transition: transform 0.4s ease;
+  }
+  .card:hover .project-img {
+    transform: scale(1.05);
+  }
+  .cv-container{display: flex; flex-direction: column; justify-content: space-between;}
+  .cv{ margin-bottom:4px; font-family: 'JetBrains Mono', monospace; border-radius: 3px; border: 2px solid var(--accent); color: var(--accent); display: flex; padding:5px; justify-content: space-between; align-items: center; font-size: larger;}
+  .cv-button{ font-family:'JetBrains Mono' ; background-color: transparent;border-radius: 3px;  border: 2px solid var(--accent); color: var(--accent); padding: 10px;font-size: medium; cursor: pointer; }
+</style>
+</head>
+<body>
+  <!-- MASTHEAD -->
+  <header class="masthead">
+    <div class="mastwrap">
+      <div class="nameplate">Meriem Ferrah's <span>Portfolio</span></div>
+      <nav class="nav" aria-label="Sections">
+        <a href="#front">Front Page</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- TICKER -->
+  <div class="ticker" aria-label="Headlines ticker">
+    <div class="ticker-row">
+      <div class="scroll">
+        <div class="bullet">Welcome to my Portfolio.</div>
+        <div class="bullet">Know more about Me.</div>
+        <div class="bullet">Ferrah Meriem.</div>
+        <!-- repeat for seamless loop -->
+        <div class="bullet">Welcome to my Portfolio.</div>
+        <div class="bullet">Know more about Me.</div>
+        <div class="bullet">Ferrah Meriem.</div>
+        
+        <div class="bullet">Welcome to my Portfolio.</div>
+        <div class="bullet">Know more about Me.</div>
+        <div class="bullet">Ferrah Meriem.</div>
+        
+        <div class="bullet">Welcome to my Portfolio.</div>
+        <div class="bullet">Know more about Me.</div>
+        <div class="bullet">Ferrah Meriem.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRONT PAGE -->
+  <main id="front" class="front">
+    <section class="lead">
+      <article class="lede tilt">
+        <div class="kicker">Exclusive</div>
+        <h1 class="headline">Full‑Stack Builder & AI Enthusiast </h1>
+        <p class="dropcap">Hello, I’m Meriem Ferrah, Third-year student at ESI Algiers, passionate about full-stack web development and AI. Reliable, motivated, and a strong team player, I build modern and efficient web applications while also exploring intelligent solutions through AI</p>
+        <p class="byline">By Meriem Ferrah · ESI Algiers · mm_ferrah@esi.dz</p>
+      </article>
+      <aside class="portrait">
+          <div class="initials"><img src="./assets/iM.jpg" alt=""></div>
+        
+      </aside>
+    </section>
+
+    <!-- Feature columned copy -->
+    <section aria-label="Feature story" style="margin-top:16px;">
+      <div class="columns">
+        <p><strong>Craft</strong> From complexity to clarity: I enjoy finding simple, practical solutions to challenging problems. Whether it’s organizing data into clear dashboards or creating smooth AI-driven interactions, I focus on building with care and paying attention to the small details that make a difference.</p>
+        <blockquote class="pullquote">“Design like a journalist: prioritize clarity, hierarchy, and the reader’s time.”</blockquote>
+        <p><strong>Stack:</strong> HTML, CSS, React.JS, Angular.JS, Next.JS, Astro.JS, Redux, ReduxToolkit, BootstrapCSS, TailwindCSS, ChakraUI, Python, JavaScript, TypeScript, NodeJs, ExpressJs, Django, FastApi, MongoDB, Firebase, SQL, Git, Github, Communication, Teamwork.</p>
+        <p><strong>Results</strong>: Shipping quickly without breaking quality. I enjoy writing small docs, creating reusable components, and leaving projects better than I found them.</p>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <div class="section-label" id="projects">
+      <div class="rule"></div>
+      <div class="slug">Front Page — Projects</div>
+      <div class="rule"></div>
+    </div>
+
+    <section class="grid" aria-label="Project cards">
+     
+  <article class="card span-6 tilt">
+    <img src="./assets/NotaMind.png" alt="NotaMind Project" class="project-img">
+    <div class="body">
+      <h3>NotaMind — AI Document Search</h3>
+      <p>An intelligent web app for uploading and interacting with PDFs using AI</p>
+      <div class="chips">
+        <span class="chip">Next</span>
+        <span class="chip">LangChain</span>
+        <span class="chip">Convex</span>
+        <span class="chip">GeminiAi</span>
+        <span class="chip">Python</span>
+      </div>
+      <p class="meta">2025 · In progress</p> 
+      <!--<a class="meta" href="https://github.com/FERRAHmeriem/NotaMind"> -> Go to the github repo</a>-->
+    </div>
+  </article>
+    <article class="card span-6 tilt">
+        <img src="./assets/oulamuna.png" alt="Wanderly Project" class="project-img">
+        <div class="body">
+        <h3>Oulamuna – Thynk Teck</h3>
+        <p>A website to showcase Algerian scholars, allowing users to create profiles for scholars they admire.</p>
+        <div class="chips">
+            <span class="chip">React</span>
+            <span class="chip">Tailwind</span>
+            <span class="chip">Express</span>
+            <span class="chip">MongoDB</span>
+        </div>
+        <p class="meta">2025</p>
+        <a class="meta" href="https://oulamuna.onrender.com/"> -> Go to the Website</a>
+        </div>
+    </article>
+  <article class="card span-4 tilt">
+    <img src="./assets/euvoria.jpg" alt="euvoria Project" class="project-img">
+    <div class="body">
+      <h3>Euvora - ESI SBA</h3>
+      <p>Collaborated in a team to develop a Web platform that serves as a central hub for all types of events in Algeria.</p>
+      <div class="chips">
+        <span class="chip">Express</span>
+        <span class="chip">React</span>
+        <span class="chip">MongoDB</span>
+        <span class="chip">Tailwind</span>
+      </div>
+      <p class="meta">2024</p>
+    </div>
+  </article>
+
+  <article class="card span-4 tilt">
+    <img src="./assets/gdsc.png" alt="Wanderly Project" class="project-img">
+    <div class="body">
+      <h3>Club Website – GDSC SBA</h3>
+      <p>Contributed to the frontend to present the club’s activities, events, and team, enhancing its online presence and accessibility.</p>
+      <div class="chips">
+        <span class="chip">Next</span>
+        <span class="chip">TypeScript</span>
+        <span class="chip">Tailwind</span>
+      </div>
+      <p class="meta">2024</p>
+      <a class="meta" href="https://gdsc-esi-sba.vercel.app/"> -> Go to the Website</a>
+    </div>
+  </article>
+  <article class="card span-4 tilt">
+    <img src="./assets/ramy.jpg" alt="Wanderly Project" class="project-img">
+    <div class="body">
+      <h3>Merchandising AI App - AlgeirsUp</h3>
+      <p>The RAMY app helps monitor store shelves by analyzing photos taken in retail environments.</p>
+      <div class="chips">
+        <span class="chip">Python</span>
+        <span class="chip">YOLOv8</span>
+      </div>
+      <p class="meta">2025</p>
+    </div>
+  </article>
+    </section>
+
+    <!-- EXPERIENCE as classifieds in a sidebar -->
+    <div class="section-label" id="experience" style="margin-top: 34px;">
+      <div class="rule"></div>
+      <div class="slug">Metro — Experience</div>
+      <div class="rule"></div>
+    </div>
+
+    <section class="two-col">
+        <div class="cv-container">
+            <div class="columns">
+                <p><strong>Thynk Teck Intern · Front-End Developer</strong> (2025). Built the Oulamuna platform using React</p>
+                <blockquote class="pullquote">“Move fast, but keep the typography classy.”</blockquote>
+                <p><strong>Routimize Intern · AI Developer</strong> (2025 · Now). Working on AI projects.</p>
+            </div>
+            <div class="cv">
+                <p>Download my CV with all my information from here</p>
+                <a href="./assets/CV-FERRAH-MERIEM-.pdf" target="_blank">
+                    <button class="cv-button">Get CV</button>
+                </a>
+            </div>
+        </div>
+      <aside class="classifieds">
+        <div class="ad">
+          <div class="title">AVAILABLE FOR: Work / Internship</div>
+          <div class="meta">Remote or On-site · Part-time / Freelance</div>
+        </div>
+        <div class="ad">
+          <div class="title">CONTACT</div>
+          <p><strong>Email: </strong><a href="mailto:mm_ferrah@esi.dz">mm_ferrah@esi.dz</a></p>
+          <p><strong>GitHub: </strong> <a href="https://github.com/FERRAHmeriem" target="_blank">github.com/FERRAHmeriem</a></p>
+          <p><strong>LinkedIn: </strong> <a href="https://www.linkedin.com/in/meriem-ferrah-52818927a/" target="_blank">linkedin.com/in/FERRAHmeriem</a></p>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <!-- FOOTER / LETTERS -->
+  <footer id="contact" aria-label="Letters to the editor">
+    <div class="footerwrap">
+      <div class="letter">
+        <h3 style="margin-top:0; font-family:'Playfair Display', serif;">Letters to the Editor</h3>
+        <p>Have a project in mind, or want to collaborate? I read every message!! tell me your goal and timeline, and I’ll reply with next steps.</p>
+      </div>
+      <div>
+        <div class="meta2">© 2025 Meriem Ferrah · Set in Playfair Display & Inter · Printed on CSS‑paper</div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
