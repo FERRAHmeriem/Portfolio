@@ -3,40 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Meriem Ferrah — Portfolio Gazette</title>
-  <meta name="description" content="A modern newspaper‑style portfolio for Meriem Ferrah — pure HTML & CSS." />
+  <title>Meriem Ferrah</title>
+  <meta name="description" content="A modern newspaper‑style portfolio for Meriem Ferrah" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/png" href="./assets/icon.png" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* =====================
-       THE PORTFOLIO GAZETTE
-       Pure HTML + CSS only
-       ===================== */
-
-    /* Color & type system */
     :root{
-      --ink: #131311;           /* body text */
+      --ink: #131311;          
       --ink-soft: #44433f;
       --ink-faint: #6e6b63;
-      --paper: #f6f3ea;         /* warm off‑white */
-      --paper-2: #f1ede3;       /* subtle panel */
-      --accent: #b22d2d;        /* headline red */
-      --accent-2: #1a6e6e;      /* secondary teal */
-      --rule: rgba(0,0,0,.14);  /* hairline rules */
+      --paper: #f6f3ea;        
+      --paper-2: #f1ede3;      
+      --accent: #b22d2d;        
+      --accent-2: #1a6e6e;      
+      --rule: rgba(0,0,0,.14);  
       --shadow: 0 10px 30px rgba(0,0,0,.08);
       --radius: 16px;
       --max: 1150px;
     }
 
-    /* Base */
     *{ box-sizing: border-box; }
     html{ scroll-behavior:smooth; }
     body{
       margin:0; color:var(--ink); background: var(--paper);
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       line-height:1.6; font-size: 17px; 
-      /* subtle fiber texture via layered gradients */
       background-image:
         radial-gradient(2200px 900px at -10% -20%, rgba(0,0,0,.05), transparent 40%),
         radial-gradient(1400px 800px at 110% 10%, rgba(0,0,0,.05), transparent 45%),
@@ -49,12 +42,10 @@
     img{ max-width:100%; height:auto; display:block; }
     a{ color:inherit; text-decoration:none; }
 
-    /* Accessibility */
     @media (prefers-reduced-motion: reduce){
       *{ animation: none !important; transition: none !important; }
     }
 
-    /* ====== Masthead ====== */
     .masthead{
       position: sticky; top:0; z-index: 10; backdrop-filter: blur(6px);
       background: color-mix(in oklab, var(--paper) 75%, transparent);
@@ -68,13 +59,11 @@
     }
     .nameplate span{ color: var(--accent); }
     
-    /* Nav — thin uppercase with animated underline */
-    .nav{ display:flex; gap:12px; flex-wrap:wrap; }
-    .nav a{ font-weight:700; text-transform:uppercase; letter-spacing:.14em; font-size: 12px; padding:8px 10px; position:relative; }
+    .nav{ display:flex; gap: 5px;  }
+    .nav a{white-space: nowrap; font-weight:700; text-transform:uppercase; letter-spacing:.14em; font-size: 12px; padding:8px 10px; position:relative; }
     .nav a::after{ content:""; position:absolute; left:10px; right:10px; bottom:6px; height:1.5px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .3s ease; opacity:.7; }
     .nav a:hover::after{ transform: scaleX(1); }
 
-    /* ====== Ticker ====== */
     .ticker{ border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); background: var(--paper-2); }
     .ticker-row{ max-width: var(--max); margin:0 auto; padding: 8px 18px; display:flex; gap:12px; align-items:center; overflow:hidden; }
     .tag{z-index: 100; font-family: 'JetBrains Mono', monospace; background:var(--ink); color:var(--paper); padding:6px 10px; border-radius: 999px; font-size: 12px; }
@@ -83,7 +72,6 @@
     .bullet{ position:relative; padding-left:16px; }
     .bullet::before{ content:"•"; position:absolute; left:0; top:0; color: var(--ink-faint); }
 
-    /* ====== Front page hero ====== */
     .front{ max-width: var(--max); margin: 26px auto; padding: 0 8px; }
     .lead{ display:grid; grid-template-columns: 1.6fr .4fr; gap: 20px; }
     @media (max-width: 900px){ .lead{ grid-template-columns: 1fr; } }
@@ -103,7 +91,6 @@
     }
     .byline{ font-family:'JetBrains Mono', monospace; color: var(--ink-faint); font-size: 12px; margin-top:8 px; }
 
-    /* Hero card */
     .portrait{
       border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden; background: var(--paper-2);
     }
@@ -121,7 +108,6 @@
         filter: grayscale(100%); 
 }
    
-    /* ====== Multi-column section ====== */
     .columns{ column-count: 3; column-gap: 26px; }
     @media (max-width: 1100px){ .columns{ column-count: 2; } }
     @media (max-width: 700px){ .columns{ column-count: 1; } }
@@ -130,12 +116,10 @@
       border: 1px solid var(--rule); border-radius: 12px; font-family: 'Playfair Display', serif; font-weight:700; font-size: 20px;
     }
 
-    /* ====== Section rules & labels ====== */
     .section-label{ display:flex; align-items:center; gap:12px; margin: 40px 0 14px; }
     .section-label .rule{ flex:1; height:1px; background: var(--rule); }
     .section-label .slug{ font-family:'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing:.18em; font-size: 11px; color: var(--ink-faint); }
 
-    /* ====== Cards Grid (projects) ====== */
     .grid{ display:grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
     .span-6{ grid-column: span 6; }
     .span-4{ grid-column: span 4; }
@@ -154,7 +138,6 @@
     .chips{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
     .chip{ font-size: 12px; padding:6px 10px; border-radius:999px; border:1px solid var(--rule); background: var(--paper-2); }
 
-    /* Hover reveal — faux ink spread */
     .card::after{
       content:""; position:absolute; inset:auto -30% -40% auto; width: 80%; height: 80%; border-radius: 999px;
       background: radial-gradient(50% 50% at 50% 50%, rgba(178,45,45,.18), transparent 60%);
@@ -162,7 +145,6 @@
     }
     .card:hover::after{ inset: -30% auto auto -30%; }
 
-    /* ====== Sidebar box (Experience as classifieds) ====== */
     .two-col{ display:grid; grid-template-columns: 2fr 1fr; gap: 20px; }
     @media (max-width: 900px){ .two-col{ grid-template-columns: 1fr; } }
 
@@ -171,17 +153,14 @@
     .ad:last-child{ border-bottom: none; }
     .ad .title{ font-weight:800; }
 
-    /* ====== Footer (letters to the editor) ====== */
     footer{ margin-top: 50px; border-top: 1px dotted var(--ink);  }
     .footerwrap{ max-width: var(--max); margin:0 auto; padding: 20px 18px 60px; display:flex; gap: 16px; flex-direction: column; }
     @media (max-width: 900px){ .footerwrap{ grid-template-columns: 1fr; } }
     .letter{ background: #fff; border:1px solid var(--rule); border-radius: 12px; padding: 16px; box-shadow: var(--shadow);  }
 
-    /* Micro-interactions */
     .tilt{ transform: perspective(800px) rotateX(0deg) rotateY(0deg); transition: transform .4s ease; }
     .tilt:hover{ transform: perspective(800px) rotateX(1.2deg) rotateY(-1.2deg); }
 
-    /* Print style – make it look like a proper newspaper page */
     @media print{
       .masthead, .ticker, .nav, .classifieds, footer{ display:none !important; }
       body{ background: white; }
@@ -199,33 +178,95 @@
   .card:hover .project-img {
     transform: scale(1.05);
   }
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: var(--ink);
+}
+
+@media (max-width: 1100px) {
+  .mastwrap{
+    flex-direction: column;
+    align-items: center;
+  }
+  .nav {
+    display: none;
+    flex-direction: row;
+    gap: 14px;
+    padding: 12px 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .nav.active {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
   .cv-container{display: flex; flex-direction: column; justify-content: space-between;}
   .cv{ margin-bottom:4px; font-family: 'JetBrains Mono', monospace; border-radius: 3px; border: 2px solid var(--accent); color: var(--accent); display: flex; padding:5px; justify-content: space-between; align-items: center; font-size: larger;}
   .cv-button{ font-family:'JetBrains Mono' ; background-color: transparent;border-radius: 3px;  border: 2px solid var(--accent); color: var(--accent); padding: 10px;font-size: medium; cursor: pointer; }
+  .cv-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+@media (max-width: 1100px) {
+  .cv {
+    font-size: medium;
+    justify-content: space-around;
+  }
+}
+@media (max-width: 600px) {
+  .cv {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+.jsp{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
 </style>
 </head>
 <body>
-  <!-- MASTHEAD -->
   <header class="masthead">
-    <div class="mastwrap">
-      <div class="nameplate">Meriem Ferrah's <span>Portfolio</span></div>
-      <nav class="nav" aria-label="Sections">
-        <a href="#front">Front Page</a>
-        <a href="#projects">Projects</a>
-        <a href="#experience">Experience</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
-  </header>
+  <div class="mastwrap">
+    <div class="jsp">
+    <div class="nameplate">Meriem Ferrah's <span>Portfolio</span></div>
+    <button class="menu-toggle" onclick="document.querySelector('.nav').classList.toggle('active')">
+      ☰
+    </button>
+  </div>
+    
+    <nav class="nav" aria-label="Sections">
+      <a href="#front">Front Page</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
 
-  <!-- TICKER -->
-  <div class="ticker" aria-label="Headlines ticker">
+
+ <div class="ticker" aria-label="Headlines ticker">
     <div class="ticker-row">
       <div class="scroll">
         <div class="bullet">Welcome to my Portfolio.</div>
         <div class="bullet">Know more about Me.</div>
         <div class="bullet">Ferrah Meriem.</div>
-        <!-- repeat for seamless loop -->
+        
         <div class="bullet">Welcome to my Portfolio.</div>
         <div class="bullet">Know more about Me.</div>
         <div class="bullet">Ferrah Meriem.</div>
@@ -241,7 +282,6 @@
     </div>
   </div>
 
-  <!-- FRONT PAGE -->
   <main id="front" class="front">
     <section class="lead">
       <article class="lede tilt">
@@ -256,7 +296,6 @@
       </aside>
     </section>
 
-    <!-- Feature columned copy -->
     <section aria-label="Feature story" style="margin-top:16px;">
       <div class="columns">
         <p><strong>Craft</strong> From complexity to clarity: I enjoy finding simple, practical solutions to challenging problems. Whether it’s organizing data into clear dashboards or creating smooth AI-driven interactions, I focus on building with care and paying attention to the small details that make a difference.</p>
@@ -266,7 +305,6 @@
       </div>
     </section>
 
-    <!-- PROJECTS -->
     <div class="section-label" id="projects">
       <div class="rule"></div>
       <div class="slug">Front Page — Projects</div>
@@ -287,8 +325,9 @@
         <span class="chip">GeminiAi</span>
         <span class="chip">Python</span>
       </div>
-      <p class="meta">2025 · In progress</p> 
-      <!--<a class="meta" href="https://github.com/FERRAHmeriem/NotaMind"> -> Go to the github repo</a>-->
+      <p class="meta">2025</p> 
+      <a class="meta" href="https://github.com/FERRAHmeriem/NotaMind"> -> Go to the github repo</a><br>
+      <a class="meta" href="https://nota-mind.vercel.app/"> -> Go to the Website</a>
     </div>
   </article>
     <article class="card span-6 tilt">
@@ -303,7 +342,8 @@
             <span class="chip">MongoDB</span>
         </div>
         <p class="meta">2025</p>
-        <a class="meta" href="https://oulamuna.onrender.com/"> -> Go to the Website</a>
+          <a class="meta" href="https://github.com/FERRAHmeriem/Oulamuna"> -> Go to the github repo</a><br>
+          <a class="meta" href="https://oulamuna.onrender.com/"> -> Go to the Website</a>
         </div>
     </article>
   <article class="card span-4 tilt">
@@ -349,7 +389,6 @@
   </article>
     </section>
 
-    <!-- EXPERIENCE as classifieds in a sidebar -->
     <div class="section-label" id="experience" style="margin-top: 34px;">
       <div class="rule"></div>
       <div class="slug">Metro — Experience</div>
@@ -361,7 +400,7 @@
             <div class="columns">
                 <p><strong>Thynk Teck Intern · Front-End Developer</strong> (2025). Built the Oulamuna platform using React</p>
                 <blockquote class="pullquote">“Move fast, but keep the typography classy.”</blockquote>
-                <p><strong>Routimize Intern · AI Developer</strong> (2025 · Now). Working on AI projects.</p>
+                <p><strong>Routimize Intern · AI Developer</strong> (2025 · Present). Working on AI projects.</p>
             </div>
             <div class="cv">
                 <p>Download my CV with all my information from here</p>
@@ -385,7 +424,6 @@
     </section>
   </main>
 
-  <!-- FOOTER / LETTERS -->
   <footer id="contact" aria-label="Letters to the editor">
     <div class="footerwrap">
       <div class="letter">
@@ -393,7 +431,12 @@
         <p>Have a project in mind, or want to collaborate? I read every message!! tell me your goal and timeline, and I’ll reply with next steps.</p>
       </div>
       <div>
-        <div class="meta2">© 2025 Meriem Ferrah · Set in Playfair Display & Inter · Printed on CSS‑paper</div>
+      <div class="meta2">
+        © <span id="year"></span> Meriem Ferrah · Set in Playfair Display & Inter · Printed on CSS-paper
+      </div>
+      <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+      </script>
       </div>
     </div>
   </footer>
